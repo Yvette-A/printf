@@ -1,26 +1,32 @@
 #include "main.h"
+/**
+ * print_c - Print characters (%c)
+ * @ar_list: Store the a list of characters
+ * Return: num of parameters printed
+ */
+int print_c(va_list ar_list)
+{
+	int c = va_arg(ar_list, int);
+
+	return (_putchar(c));
+}
 
 /**
- * _printf - Outputs a formatted string.
- * @format: Character string to print - may contain directives.
- *
- * Return: The number of characters printed.
- */
-int _printf(const char *format, ...)
+* print_s - print string (%s)
+* @ar_list: Store the a list of characters
+* Return: num of parameters printed
+*/
+int print_s(va_list ar_list)
 {
-	buffer_t *output;
-	va_list args;
-	int ret;
+	int i, count = 0;
+	char *str;
 
-	if (format == NULL)
-		return (-1);
-	output = init_buffer();
-	if (output == NULL)
-		return (-1);
+	str = va_arg(ar_list, char *);
+	if (str == NULL)
+		str = "(null)";
 
-	va_start(args, format);
+	for (i = 0; str[i]; i++)
+		count += _putchar(str[i]);
 
-	ret = run_printf(format, args, output);
-
-	return (ret);
+	return (count);
 }
